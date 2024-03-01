@@ -1,237 +1,120 @@
-KPI_Id = int (PK)
-Emp_Id : int(FK)
-Kpi_Name : string 
-Kpi_start_date : date or string
-Kpi_end_date : date or string 
-Kpi_status : string or bool
-Kpi_Deascription : string
-Kpi_Year : date or string
+EmployeeKpiSummary table
+
+EmpKpiSummaryId: int (PK)
+EmpKpiId: int(FK)
+EmpKpiStatus : string
+EmpKpiYear : string
+
+| KpiSummaryId | KpiId | KpiStatus   | KpiYear   |
+|--------------|-------|-------------|-----------|
+| 1            | 101   | In Progress | 2024      |
+| 2            | 102   | Completed   | 2023      |
+| 3            | 103   | On Hold     | 2025      |
+| 4            | 104   | Not Started | 2022      |
+| 5            | 105   | In Progress | 2024      |
 
 
-Kpi summary table
-
-KpiSummaryId: int (PK)
-KpiStatus : string
-KpiYear : string
 
 
 
 EmployeeKpi Table
 
-KpiId: int(PK)
-ManagerId: int (FK)
-EmpId: int (FK)
-KpiName: string
-KpiStartDate: string
-KpiEndDate: string
-KpiDescription: string
+EmpKpiId : int (PK) 
+ManagerId : int (FK)
+EmpId  :int (FK)
+EmpKpiName   :string        
+EmpKpiStartDate: string
+EmpKpiEndDate: string
+EmpKpiDescription: string
+
+| EmpKpiId | ManagerId | EmpId | EmpKpiName   | EmpKpiStartDate| EmpKpiEndDate  | EmpKpiDescription                            |
+|-------|-----------|-------|------------------|--------------|-------------|-------------------------------------------|
+| 1     | 201       | 301   | Project A        | 2024-01-15   | 2024-06-30  | Improve project delivery efficiency      |
+| 2     | 202       | 302   | Sales Targets    | 2023-07-01   | 2023-12-31  | Achieve 20% increase in quarterly sales  |
+| 3     | 203       | 303   | Training Program | 2025-03-01   | 2025-09-30  | Conduct workshops for skill development  |
+| 4     | 204       | 304   | Quality Assurance | 2022-11-10  | 2023-05-15  | Implement quality control measures       |
+| 5     | 205       | 305   | Innovation Project| 2024-04-20   | 2024-11-30  | Launch new product feature                |
 
 
-AppraisalHader Table
-
-AppraisalHeaderId: int(PK)
-AppraisalHeaderName :  string
 
 
+EmployeeAppraisalHader Table
 
-AppraisalContent Table
+EmpAppraisalHeaderId: int(PK)
+EmpAppraisalHeaderName :  string
+EmpAppraisalHeaderWeightage: float
 
-AppraisalContentId: int(PK)
-AppraisalContentName: string
-AppraisalContentWeight: float
+| EmpAppraisalHeaderId |EmpAppraisalHeaderName |EmpAppraisalHeaderWeightage |
+|-------------------   |---------------------- |---------------------------|
+| 1                    | Leadership Skills     | 15.5                      |
+| 2                    | Goal Achievement      | 20.0                      |
+| 3                    | Communication Skills  | 10.2                      |
+| 4                    | Team Collaboration    | 12.8                      |
+| 5                    | Innovation            | 18.5                      |
 
 
-AppraisalRanking Table
 
-AppraisalRankingId: int(PK)
+
+EmployeeAppraisalContent Table
+
+EmpAppraisalContentId: int(PK)
+EmpAppraisalHeaderId: int(FK)
+EmpAppraisalContentName: string
+EmpAppraisalContentDescription: string
+EmpAppraisalContentWeight: float
+
+| EmpAppraisalContentId | EmpAppraisalHeaderId | EmpAppraisalContentName    | EmpAppraisalContentDescription                   | EmpAppraisalContentWeight |
+|---------------------  |--------------------- |--------------------- -- -- |-----------------------------------------------  -|------------------------|
+| 1                     | 1                    | Vision and Strategy        | Demonstrates a clear vision for the team         | 10.0                   |
+| 2                     | 1                    | Decision-making            | Makes effective decisions under pressure         | 8.5                    |
+| 3                     | 2                    | Goal Setting               | Sets challenging and achievable goals            | 15.0                   |
+| 4                     | 2                    | Goal Progress              | Shows consistent progress toward goals           | 12.0                   |
+| 5                     | 3                    | Communication Skills       | Communicates clearly and effectively             | 9.8                    |
+| 6                     | 3                    | Active Listening           | Listens attentively and understands viewpoints   | 10.2                   |
+
+
+EmployeeAppraisalRanking Table
+
+EmpAppraisalRankingId: int(PK)
+EmpAppraisalContentId: int(FK)
 EmpId: int(FK)
 ManagerId : int(FK)
-AppraisalEmployeeRank : int
-AppraisalEmployeeComment : string
-AppraisalManagerRank: int
+AppraisalRank : int
+AppraisalComment : string
+AppraisalRankingCalculate: float
+AppraisalRankingCalculateTotal: float
+AppraisalRankUserRole: string
+
+
+
+//optional
+AppraisalManagerRankId: int
 AppraisalManagerComment : string
 
+| EmpAppraisalRankingId  | EmpAppraisalContentId | EmpId | ManagerId | AppraisalRank | AppraisalComment                      |AppraisalRankingCalculate |AppraisalRankingCalculateTotal|  AppraisalRankUserRole |
+|---------------------|---------------------|-------|------------|----------------|------------------------------------------|--------------------------|------------------------  |
+| 1                   | 1                   | 101   | 201        | 4              | Demonstrates strong leadership skills    | 38.5                     |       5               |  |        Employee               
+| 2                   | 2                   | 102   | 202        | 3              | Making progress towards set goals        | 26.8                     |       5                  |       Manager       
+| 3                   | 2                   | 102   | 202        | 3              | Making progress towards set goals        | 26.8                     |       5                  |       Employee
+| 4                   | 2                   | 102   | 202        | 3              | Making progress towards set goals        | 26.8                     |       5                  |       Manager       
 
 
 
 
 
-  KPI_Id   Emp_Id   Kpi_Name                    Kpi_start_date   Kpi_end_date   Kpi_status   Kpi_Description                   Kpi_Year  
- ------- ------- ----------------              ---------------- -------------- ------------- ------------------               ---------  
-  1        101     New Language learn Target     2024-01-01       2024-12-31     In Progress   Achieve $1M sales                2024      
-  2        102     client Satisfaction           2024-01-01       2024-12-31     Completed     Maintain 90% satisfaction rate   2024      
-  3        102     Employee Engagement           2024-01-01       2024-12-31     In Progress   Implement quarterly surveys      2024      
-  4        104     Project Timelines             2024-01-01       2024-12-31     Not Started   Define project milestones        2024      
 
-In this table:
 
-- `kpiid` is the primary key for each Key Performance Indicator (KPI).
-- `empId` is the foreign key referencing the employee associated with the KPI.
-- `kpi_Name` represents the name or title of the KPI.
-- `kpi_start_date` and `kpi_end_date` define the duration or period for which the KPI is applicable.
-- `kpi_status` indicates the current status of the KPI, whether it's in progress, completed, not started, etc.
-- `kpi_Description` provides a brief description or details about the KPI.
-- `kpi_Year` specifies the year to which the KPI belongs.
+EmployeeAppraisalOverallRating Table
 
-===================================================================================================================================================
+AppraisalOverallRatingId: int(PK)
+AppraisalRankingId :int()
+AppraisalOverallRank : float
 
 
-
-
-Capability table
-
-capablity_Id: int(PK)
-Capablity_Name: string
-Weightage : float
-
-
-
-optional
-Self_Weighted_Ratings: float;
-Manager_Weighted_Ratings: float;
-
-
-Self_Ranking table
-
-selfRanking_Id : int(PK)
-capablity_Id: int(FK)
-Professionalism_Id: int (FK)
-People_Relationship_Id : int(FK)
-Communication_Id: int (FK)
-EMP_ID: int(FK)
-Self_Rank: int
-self_comment : string
-
-
-
-Manager_Ranking table
-
-managerRanking_Id : int(PK)
-capablity_Id: int(FK)
-Professionalism_Id: int (FK)
-People_Relationship_Id : int(FK)
-Communication_Id: int (FK)
-Manager_Id : int(FK)
-Self_Rank: int
-self_comment : string
-
-
-
-
-
-
-
-
-
-
-  capablity_Id   EMP_ID   Manager_Id   Capablity_Name     Weightage   self_Ranking_Employee   self_comment         Manager_ratings   ManagerComments   Self_Weighted_Ratings   Manager_Weighted_Ratings  
- -------------- -------- ------------ ------------------ ----------- ----------------------- -------------------- ----------------- ----------------- ----------------------- -------------------------- 
-  1              101      201          Communication      0.8         4                       Good listener        5                 Well done!        3.2                     4.0                       
-  2              102      202          Leadership         0.9         3                       Takes initiative     4                 Keep it up!       2.7                     3.6                       
-  3              102      203          Problem-solving    0.85        5                      Analytical skills     4                 Great job!        4.25                    3.4                       
-  4              104      204          Teamwork           0.75        4                       Collaborative        3                 Need improvement  3.0                     2.25                      
-
-                                                                                                                                                      Total_self_weight=self_weight_ratings* 0.5 = 6.58
-                                                                                                                                                      Total=Manager_Weighted_Ratings* 0.5 = 6.63
-
-In the table above:
-
-- `Self_Weighted_Ratings` is calculated as `self_Ranking_Employee * Weightage`.
-- `Manager_Weighted_Ratings` is calculated as `Weightage * Manager_ratings`.
-
-These calculated fields provide a weighted assessment of the employee's and manager's ratings based on the defined weightage for each capability.
-
-
-===============================================================================================================================================================================
-
-Professionalism table
-
-Professionalism_Id: int(PK)
-EMP_ID: int(FK)
-Manager_Id: int(FK)
-Professionalism_Name: string
-Weightage : float
-self_Ranking_Employee :int 
-self_comment: string
-Manager_ratings :int
-ManagerComments: string
-
-optional
-Self_Weighted_Ratings: float;
-Manager_Weighted_Ratings: float;
-
-
-
- Professionalism_Id  EMP_ID  Manager_Id  Professionalism_Name    Weightage  self_Ranking_Employee  self_comment        Manager_ratings  ManagerComments  Self_Weighted_Ratings  Manager_Weighted_Ratings 
---------------      --------------------------------------      -----------------------------------------------------------------------------------------------------------------------------------------
- 1                   101     201         Communication           0.8           4                   Good listener       5                Well done!       3.2                    4.0                      
- 2                   102     202         Leadership              0.9           3                   Takes initiative    4                Keep it up!      2.7                    3.6                      
- 3                   102     203         Problem-solving         0.85          5                   Analytical skills   4                Great job!       4.25                   3.4                      
- 4                   104     204         Teamwork                0.75          4                   Collaborative       3                Need improvement 3.0                    2.25                     
-
-                                                                                                                                                                    Total_self_weight=self_weight_ratings * 0.2
-                                                                                                                                                                    Total=Manager_Weighted_Ratings * 0.2
-
-
-===============================================================================================================================================================================
-
-People Relationship table
-
-People_Relationship_Id: int(PK)
-EMP_ID: int(FK)
-Manager_Id: int(FK)
-People_Relationship_Name: string
-Weightage : float
-self_Ranking_Employee :int 
-self_comment: string
-Manager_ratings :int
-ManagerComments: string
-
-optional
-Self_Weighted_Ratings: float;
-Manager_Weighted_Ratings: float;
-
-
-
- People_Relationship_Id  EMP_ID  Manager_Id  People_Relationship_Name    Weightage  self_Ranking_Employee  self_comment        Manager_ratings  ManagerComments  Self_Weighted_Ratings  Manager_Weighted_Ratings 
---------------          --------------------------------------          -----------------------------------------------------------------------------------------------------------------------------------------
- 1                       101     201         Communication               0.8           4                   Good listener       5                Well done!       3.2                    4.0                      
- 2                       102     202         Leadership                  0.9           3                   Takes initiative    4                Keep it up!      2.7                    3.6                      
- 3                       102     203         Problem-solving             0.85          5                   Analytical skills   4                Great job!       4.25                   3.4                      
- 4                       104     204         Teamwork                    0.75          4                   Collaborative       3                Need improvement 3.0                    2.25                     
-
-                                                                                                                                                                            Total_self_weight=self_weight_ratins*0.2
-                                                                                                                                                                            Total=Manager_Weighted_Ratings*0.2 
-
-
-===============================================================================================================================================================================
-
-Communication table
-
-Communication_Id: int(PK)
-EMP_ID: int(FK)
-Manager_Id: int(FK)
-Communication_Name: string
-Weightage : float
-self_Ranking_Employee :int 
-self_comment: string
-Manager_ratings :int
-ManagerComments: string
-
-optional
-Self_Weighted_Ratings: float;
-Manager_Weighted_Ratings: float;
-
-
-Communication_Id  EMP_ID  Manager_Id  Communication_Name    Weightage  self_Ranking_Employee  self_comment        Manager_ratings  ManagerComments  Self_Weighted_Ratings  Manager_Weighted_Ratings 
---------------    --------------------------------------    -----------------------------------------------------------------------------------------------------------------------------------------
- 1                 101     201         Communication         0.8        4                      Good listener       5                Well done!       3.2                    4.0                      
- 2                 102     202         Leadership            0.9        3                      Takes initiative    4                Keep it up!      2.7                    3.6                      
- 3                 102     203         Problem-solving       0.85        5                     Analytical skills   4                Great job!       4.25                   3.4                      
- 4                 104     204         Teamwork              0.75       4                      Collaborative       3                Need improvement 3.0                    2.25                     
-
-                                                                                                                                                            Total_self_weight=self_weight_ratings*0.1
-                                                                                                                                                            Total=Manager_Weighted_Ratings*0.1
-
-
-
+| AppraisalOverallRatingId | AppraisalRankingId | AppraisalOverallRank |
+|--------------------------|--------------------|-----------------------|
+| 1                        | 1                  | 36.5                  |
+| 2                        | 2                  | 29.0                  |
+| 3                        | 3                  | 34.2                  |
+| 4                        | 4                  | 17.5                  |
+| 5                        | 5                  | 43.5                  |
