@@ -20,7 +20,7 @@ EmpKpiYear : string
 EmployeeKpi Table
 
 EmpKpiId : int (PK) 
-ManagerId : int (FK)
+ManagerId or | UserId : int (FK)
 EmpId  :int (FK)
 EmpKpiName   :string        
 EmpKpiStartDate: string
@@ -78,7 +78,7 @@ EmployeeAppraisalRanking Table
 EmpAppraisalRankingId: int(PK)
 EmpAppraisalContentId: int(FK)
 EmpId: int(FK)
-ManagerId : int(FK)
+ManagerId | UserId : int(FK)
 AppraisalRank : int
 AppraisalComment : string
 AppraisalRankingCalculate: float
